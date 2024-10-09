@@ -1,0 +1,50 @@
+<div>
+    <h2>Lista de Órdenes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Fecha Pedido</th>
+          <th>Precio Total</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido.idpedido }}</td>
+            <td>{{ pedido.cliente }}</td>
+            <td>{{ pedido.fechaHoraPedido | date }}</td>
+            <td>{{ pedido.precioTotal }}</td>
+            <td>{{ pedido.estadoPedido }}</td>
+            <td>
+              <button *ngIf="pedido.estadoPedido !== 'Cancelada'" (click)="cambiarEstadoPedido(pedido.idpedido, 'Cancelada')">Cancelar Orden</button>              
+              <button *ngIf="pedido.estadoPedido === 'Pendiente' || pedido.estadoPedido === 'En proceso'" 
+                      (click)="cambiarEstadoPedido(pedido.idpedido, 'Orden entregada')">
+                Entregar Orden
+              </button>
+            </td>
+          </tr>          
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <h2>Buscar Orden por ID de Pedido</h2>
+    <input type="number" #idPedidoInput placeholder="ID del pedido">
+    <button (click)="fetchPedidoByIdPedido(idPedidoInput.value)">Buscar</button>
+  
+    <div *ngIf="pedidosFiltrado">
+      <h3>Pedido Encontrado:</h3>
+      <p>ID Pedido: {{ pedidosFiltrado.idpedido }}</p>
+      <p>Cliente: {{ pedidosFiltrado.cliente }}</p>
+      <p>Fecha Pedido: {{ pedidosFiltrado.fechaHoraPedido | date }}</p>
+      <p>Estado: {{ pedidosFiltrado.estadoPedido }}</p>
+    </div>
+  
+    <div *ngIf="pedidosFiltrado === null && idPedidoInput.value">
+      <p>No se encontró ningún pedido con este ID.</p>
+    </div>
+  </div>
+  

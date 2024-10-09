@@ -1,0 +1,76 @@
+<div>
+  <h2>Crear Nuevo Platillo</h2>
+  <form (ngSubmit)="createPlatillo()">
+    <div class="form-group">
+      <label>Descripción:</label>
+      <input [(ngModel)]="nuevoPlatillo.descripcion" name="descripcion" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Precio:</label>
+      <input type="number" [(ngModel)]="nuevoPlatillo.precio" name="precio" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label>Seleccionar Ingredientes:</label>
+      <div class="input-group">
+        <select class="custom-select" [(ngModel)]="ingredienteSeleccionado" name="ingredienteSeleccionado">
+          <option *ngFor="let ingrediente of ingredientes" [ngValue]="ingrediente">{{ ingrediente.nombre }}</option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="addIngrediente(ingredienteSeleccionado)" [disabled]="!ingredienteSeleccionado">Añadir Ingrediente</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="nuevoPlatillo.ingredientesList.length > 0">
+      <h4>Ingredientes Seleccionados:</h4>
+      <ul class="list-group">
+        <li *ngFor="let ingredientePlatillo of nuevoPlatillo.ingredientesList; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ ingredientePlatillo.ingrediente.nombre }}
+          <button class="btn btn-danger btn-sm" (click)="removeIngrediente(i)">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>Subir Imagen:</label>
+      <input type="file" class="form-control" (change)="onImageSelected($event)">
+    </div>
+
+    <div *ngIf="imagePreview">
+      <h4>Previsualización de la Imagen:</h4>
+      <img [src]="imagePreview" alt="Vista previa" width="150">
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Guardar Platillo</button>
+  </form>
+</div>
+
+<hr>
+
+<div>
+  <h2>Lista de Platillos</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Foto</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let platillo of platillos">
+        <td>{{ platillo.idplatillo }}</td>
+        <td>{{ platillo.descripcion }}</td>
+        <td>{{ platillo.precio }}</td>
+        <td><img *ngIf="platillo.foto" [src]="platillo.foto" alt="Imagen del Platillo" width="100"></td>
+        <td>
+          <button class="btn btn-primary" (click)="enableEditing(platillo)">Editar</button>
+          <button class="btn btn-danger ml-2" (click)="confirmDelete(platillo)">Eliminar</button>
+        </td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

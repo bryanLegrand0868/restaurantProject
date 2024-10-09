@@ -1,0 +1,52 @@
+<p>news works!</p>
+
+<form (ngSubmit)="saveNews()" #newsForm="ngForm">
+  <div>
+    <label for="titulo">Titulo: </label>
+    <input type="text" id="titulo" [(ngModel)]="news.titulo" name="titulo" required>
+  </div>
+  <div>
+    <label for="descripcion">Descripcion: </label>
+    <input type="text" id="descripcion" [(ngModel)]="news.descripcion" name="descripcion" required>
+  </div>
+  <div>
+    <label for="imagen">Imagen: </label>
+    <input type="file" id="imagen" (change)="onFileSelected($event)" name="imagen" accept="image/*">
+  </div>
+  <div>
+    <label for="fechaPublicacion">Fecha de publicacion: </label>
+    <input type="date" id="fechaPublicacion" [(ngModel)]="news.fechaPublicacion" name="fechaPublicacion" required>
+  </div>
+  <button type="submit">{{news.idnews ? 'Actualizar' : 'Publicar'}} Anuncio</button>
+</form>
+
+<hr>
+
+<h3>Lista de Anuncios</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Id</th>
+          <th>Titulo</th>
+          <th>Descripcion</th>
+          <th>Imagen</th>
+          <th>Fecha de Publicacion</th>
+          <th>Acciones</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let anuncio of newsList">
+          <td>{{anuncio.idnews}}</td>
+          <td>{{anuncio.titulo}}</td>
+          <td>{{anuncio.descripcion}}</td>
+          <td>
+            <img *ngIf="anuncio.imagen" [src]="'data:image/jpeg;base64,' + anuncio.imagen" alt="Imagen del anuncio" style="max-width: 100px; max-height: 100px;">
+          </td>
+          <td>{{anuncio.fechaPublicacion | date:'dd/MM/yyyy'}}</td>
+          <td>
+              <button (click)="editNews(anuncio)">Editar</button>
+              <button (click)="deleteNews(anuncio.idnews)">Eliminar</button>
+          </td>
+      </tr>
+  </tbody>
+</table>

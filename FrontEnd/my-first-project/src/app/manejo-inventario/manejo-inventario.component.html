@@ -1,0 +1,43 @@
+<p>manejo-inventario works!</p>
+<hr>
+<form (ngSubmit)="addIngrediente()" #ingredienteForm="ngForm">
+    <div>
+        <label for="ingredienteName">Nombre del Ingrediente: </label>
+        <input type="text" id="ingredientName" required [(ngModel)]="ingrediente.nombre" name="nombre">
+    </div>
+
+    <div>
+        <label for="ingredienteStock">Cantidad en Stock: </label>
+        <input type="number" id="ingredienteStock" required [(ngModel)]="ingrediente.stock" name="stock">
+    </div>
+
+    <button type="submit" [disabled]="!ingredienteForm.form.valid">Agregar Ingrediente</button>
+</form>
+
+<hr>
+<p>Listado Ingredientes</p>
+<table>
+    <thead>
+        <tr>
+            <th>Id </th>
+            <th>Nombre Ingrediente</th>
+            <th>Stock </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ing of ingredients; let i = index">
+            <td>{{ing.idIngredientes}}</td>
+            <td>{{ing.nombre}}</td>
+            <td *ngIf="editingIndex !==i">{{ing.stock}}</td>
+            <td *ngIf="editingIndex ===i">
+                <input type="number" [(ngModel)]="updatedStock" />
+            </td>
+            <td>
+                <button *ngIf="editingIndex !==i" (click)="enableEditing(i, ing.stock)">Editar</button>
+                <button *ngIf="editingIndex === i" (click)="updateStock(ing)">Guardar</button>
+                <button *ngIf="editingIndex === i" (click)="editingIndex = null">Cancelar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
