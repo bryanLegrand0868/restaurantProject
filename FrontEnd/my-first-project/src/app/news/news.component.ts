@@ -90,7 +90,6 @@ export class NewsComponent implements OnInit {
         error: (err) => console.error('Error eliminando noticia:', err)
       });
   }
-  
 
   resetForm() {
     this.news = {

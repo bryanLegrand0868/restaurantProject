@@ -18,6 +18,7 @@ export class ManejoPlatillosComponent {
   platillos: Platillo[] = [];
   ingredientes: Ingrediente[] = [];
   ingredienteSeleccionado: Ingrediente | null = null;
+  cantidadSeleccionada: number = 1
   nuevoPlatillo: Platillo = {
     descripcion: '',
     precio: 0,
@@ -99,11 +100,11 @@ export class ManejoPlatillosComponent {
     }
   }  
 
-  addIngrediente(ingrediente: Ingrediente | null) {
+  addIngrediente(ingrediente: Ingrediente | null, cantidad: number) {
     if (ingrediente && !this.nuevoPlatillo.ingredientesList.some(i => i.ingrediente.idIngredientes === ingrediente.idIngredientes)) {
       const ingredientePlatillo: IngredientePlatillo = {
         ingrediente: ingrediente,
-        cantidadIngredientes: 1
+        cantidadIngredientes: cantidad
       };
       this.nuevoPlatillo.ingredientesList.push(ingredientePlatillo);
     }

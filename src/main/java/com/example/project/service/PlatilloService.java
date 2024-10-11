@@ -98,19 +98,6 @@ public class PlatilloService {
             platilloExistente.setPrecio(platillo.getPrecio());
         }
 
-        // Validamos y actualizamos los ingredientes
-        if (platillo.getIngredientesList() != null && !platillo.getIngredientesList().isEmpty()) {
-            platilloExistente.getIngredientesList().clear();  // Limpiamos la lista existente
-            for (IngredientesPlatillo ingrediente : platillo.getIngredientesList()) {
-                if (ingrediente.getIngrediente() != null && ingrediente.getIngrediente().getIdIngredientes() != null) {
-                    ingrediente.setPlatillo(platilloExistente);  // Relacionamos con el platillo existente
-                    platilloExistente.addIngrediente(ingrediente);
-                } else {
-                    throw new RuntimeException("El ingrediente no tiene un ID válido.");
-                }
-            }
-        }
-
         return platillorepo.save(platilloExistente);  // Guardamos los cambios
     }
 

@@ -1,1 +1,25 @@
-<p>Bienvenido/a admin</p>
+<div class="container mt-5">
+    <h1 class="text-center">Dashboard</h1>
+    
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-primary btn-block" (click)="navegar('inventory')">Inventario</button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-secondary btn-block" (click)="navegar('news')">Noticias</button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-success btn-block" (click)="navegar('users')">Usuarios</button>
+      </div>
+    </div>
+  
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-info btn-block" (click)="navegar('dish')">Platillos</button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-warning btn-block" (click)="navegar('order')">Órdenes</button>
+      </div>
+    </div>
+  </div>
+  

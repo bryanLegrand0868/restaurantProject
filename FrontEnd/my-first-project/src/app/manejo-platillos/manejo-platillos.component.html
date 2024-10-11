@@ -16,8 +16,9 @@
         <select class="custom-select" [(ngModel)]="ingredienteSeleccionado" name="ingredienteSeleccionado">
           <option *ngFor="let ingrediente of ingredientes" [ngValue]="ingrediente">{{ ingrediente.nombre }}</option>
         </select>
+        <input type="number" [(ngModel)]="cantidadSeleccionada" name="cantidadSeleccionada" min="1" class="form-control" placeholder="Cantidad" required>
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button" (click)="addIngrediente(ingredienteSeleccionado)" [disabled]="!ingredienteSeleccionado">Añadir Ingrediente</button>
+          <button class="btn btn-primary" type="button" (click)="addIngrediente(ingredienteSeleccionado, cantidadSeleccionada)" [disabled]="!ingredienteSeleccionado || !cantidadSeleccionada">Añadir Ingrediente</button>
         </div>
       </div>
     </div>
