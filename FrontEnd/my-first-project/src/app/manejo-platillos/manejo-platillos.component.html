@@ -68,12 +68,11 @@
         <td>{{ platillo.precio }}</td>
         <td><img *ngIf="platillo.foto" [src]="platillo.foto" alt="Imagen del Platillo" width="100"></td>
         <td>
-          <button class="btn btn-primary" (click)="enableEditing(platillo)">Editar</button>
-          <button class="btn btn-danger ml-2" (click)="confirmDelete(platillo)">Eliminar</button>
+          <button pButton type="button" icon="pi pi-pencil" (click)="enableEditing(platillo)" class="p-button-text"></button>
+          <button pButton type="button" icon="pi pi-trash" (click)="confirmDelete(platillo)" class="p-button-danger p-button-text"></button>
         </td>        
       </tr>
     </tbody>
   </table>
 </div>
-
-<button (click)="logout()">Logout</button>
+<button pButton type="button" icon="pi pi-sign-out" (click)="logout()" class="p-button-text p-button-rounded" pTooltip="Logout" tooltipPosition="bottom"></button>

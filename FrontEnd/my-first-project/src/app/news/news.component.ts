@@ -1,13 +1,16 @@
+import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, FormsModule,HttpClientModule, RouterModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule, TableModule, ButtonModule, MatSlideToggleModule], 
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })

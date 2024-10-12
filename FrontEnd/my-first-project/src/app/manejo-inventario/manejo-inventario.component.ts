@@ -3,12 +3,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { response } from 'express';
-
+import { ButtonModule } from 'primeng/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-manejo-inventario',
   standalone: true,
-  imports: [CommonModule,FormsModule,HttpClientModule, RouterModule],
+  imports: [CommonModule,FormsModule,HttpClientModule, RouterModule, ButtonModule, MatSlideToggleModule],
   templateUrl: './manejo-inventario.component.html',
   styleUrl: './manejo-inventario.component.css'
 })

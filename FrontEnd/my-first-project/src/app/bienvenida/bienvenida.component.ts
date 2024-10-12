@@ -4,11 +4,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-bienvenida',
   standalone: true,
-  imports: [FormsModule,HttpClientModule,CommonModule],
+  imports: [FormsModule,HttpClientModule,CommonModule, ButtonModule, MatSlideToggleModule],
   templateUrl: './bienvenida.component.html',
   styleUrl: './bienvenida.component.css'
 })

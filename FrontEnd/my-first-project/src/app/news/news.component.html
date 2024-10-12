@@ -1,4 +1,4 @@
-<p>news works!</p>
+<p>news</p>
 
 <form (ngSubmit)="saveNews()" #newsForm="ngForm">
   <div>
@@ -23,32 +23,40 @@
 <hr>
 
 <h3>Lista de Anuncios</h3>
-<table>
-  <thead>
-      <tr>
-          <th>Id</th>
-          <th>Titulo</th>
-          <th>Descripcion</th>
-          <th>Imagen</th>
-          <th>Fecha de Publicacion</th>
-          <th>Acciones</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let anuncio of newsList">
-          <td>{{anuncio.idnews}}</td>
-          <td>{{anuncio.titulo}}</td>
-          <td>{{anuncio.descripcion}}</td>
-          <td>
-            <img *ngIf="anuncio.imagen" [src]="'data:image/jpeg;base64,' + anuncio.imagen" alt="Imagen del anuncio" style="max-width: 100px; max-height: 100px;">
-          </td>
-          <td>{{anuncio.fechaPublicacion | date:'dd/MM/yyyy'}}</td>
-          <td>
-              <button (click)="editNews(anuncio)">Editar</button>
-              <button (click)="deleteNews(anuncio.idnews)">Eliminar</button>
-          </td>
-      </tr>
-  </tbody>
-</table>
 
-<button (click)="logout()">Logout</button>
+<p-table [value]="newsList" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Imagen</th>
+            <th>Fecha de Publicacion</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-anuncio>
+        <tr>
+            <td>{{anuncio.idnews}}</td>
+            <td>{{anuncio.titulo}}</td>
+            <td>{{anuncio.descripcion}}</td>
+            <td>
+                <img *ngIf="anuncio.imagen" [src]="'data:image/jpeg;base64,' + anuncio.imagen" alt="Imagen del anuncio" style="max-width: 100px; max-height: 100px;">
+            </td>
+            <td>{{anuncio.fechaPublicacion | date:'dd/MM/yyyy'}}</td>
+            <td>
+                <button (click)="editNews(anuncio)">Editar</button>
+                <button (click)="deleteNews(anuncio.idnews)">Eliminar</button>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            En total hay {{newsList.length}} anuncios.
+        </div>
+    </ng-template>
+</p-table>
+
+<button pButton type="button" icon="pi pi-sign-out" (click)="logout()" class="p-button-text p-button-rounded" pTooltip="Logout" tooltipPosition="bottom"></button>

@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { catchError, throwError } from 'rxjs';
 import { Platillo, Ingrediente, IngredientePlatillo } from './manejo-platillos.model';
 import { RouterModule, Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-manejo-platillos',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule, MatSlideToggleModule, ButtonModule],
   templateUrl: './manejo-platillos.component.html',
   styleUrl: './manejo-platillos.component.css'
 })
-
-
 export class ManejoPlatillosComponent {
   platillos: Platillo[] = [];
   ingredientes: Ingrediente[] = [];

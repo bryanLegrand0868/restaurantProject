@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-admin-perfil',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule, RouterModule],
+  imports: [FormsModule, HttpClientModule, CommonModule, RouterModule, ButtonModule, MatSlideToggleModule],
   templateUrl: './admin-perfil.component.html',
   styleUrls: ['./admin-perfil.component.css']  
 })
