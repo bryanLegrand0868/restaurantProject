@@ -2,18 +2,19 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
 import { response } from 'express';
 
 @Component({
   selector: 'app-manejo-inventario',
   standalone: true,
-  imports: [CommonModule,FormsModule,HttpClientModule],
+  imports: [CommonModule,FormsModule,HttpClientModule, RouterModule],
   templateUrl: './manejo-inventario.component.html',
   styleUrl: './manejo-inventario.component.css'
 })
 export class ManejoInventarioComponent {
 
-  constructor(private http:HttpClient){ }
+  constructor(private http:HttpClient, private router: Router){ }
 
   ingrediente ={
     idingredientes: null,
@@ -70,5 +71,10 @@ export class ManejoInventarioComponent {
         console.error('Error al actualizar el stock:', error);
       });
   }  
+
+  logout() {
+    localStorage.removeItem('userSession');
+    this.router.navigate(['/login']);  
+  }
 
 }

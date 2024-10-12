@@ -1,1 +1,26 @@
-<p>admin-perfil works!</p>
+<div class="admin-profile">
+  <h2>Mi Perfil</h2>
+  
+  <div *ngIf="isLoading">Cargando información del administrador...</div>
+  
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+  
+  <div *ngIf="!isLoading && !error && admin">
+    <div>
+      <label>Usuario:</label>
+      <span>{{ admin.usuario }}</span> 
+    </div>
+    <div>
+      <label>Contraseña:</label>
+      <span>**********</span>
+    </div>
+    
+    <h3>Cambiar Contraseña</h3>
+    <input type="password" [(ngModel)]="newPassword" placeholder="Nueva Contraseña">
+    <button (click)="updatePassword()" [disabled]="!newPassword">Actualizar Contraseña</button>
+  </div>
+  
+  <button (click)="logout()">Logout</button>
+</div>
+
+  

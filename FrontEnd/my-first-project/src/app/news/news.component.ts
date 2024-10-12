@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, FormsModule,HttpClientModule],
+  imports: [CommonModule, FormsModule,HttpClientModule, RouterModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
@@ -14,7 +15,7 @@ export class NewsComponent implements OnInit {
   news: any = { idnews: null, titulo: '', descripcion: '', imagen: null, fechaPublicacion: '' };
   newsList: any = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
     
   ngOnInit() {
     this.loadNews();
@@ -108,4 +109,10 @@ export class NewsComponent implements OnInit {
       console.log('Imagen seleccionada:', file.name);
     }
   } 
+
+  logout() {
+    localStorage.removeItem('userSession');
+    this.router.navigate(['/login']);  
+  }
+  
 }

@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
 import { Platillo, Ingrediente, IngredientePlatillo } from './manejo-platillos.model';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manejo-platillos',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './manejo-platillos.component.html',
   styleUrl: './manejo-platillos.component.css'
 })
@@ -27,7 +28,7 @@ export class ManejoPlatillosComponent {
   };
   imagePreview: string | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.getPlatillos();
@@ -174,8 +175,11 @@ export class ManejoPlatillosComponent {
     };
   
     this.imagePreview = platillo.foto;  // Mostrar la imagen actual en la previsualización
-  
-    console.log('Editando platillo:', this.nuevoPlatillo);
+  }
+
+  logout() {
+    localStorage.removeItem('userSession');
+    this.router.navigate(['/login']);  
   }
   
 }

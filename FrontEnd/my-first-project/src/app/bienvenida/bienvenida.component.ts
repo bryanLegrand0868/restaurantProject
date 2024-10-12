@@ -20,4 +20,9 @@ export class BienvenidaComponent {
     this.router.navigate([`/${ruta}`]);  
   }
 
+  logout() {
+    localStorage.removeItem('userSession');
+    this.router.navigate(['/login']);  
+  }
+  
 }

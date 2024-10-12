@@ -7,14 +7,19 @@ import { ExamenComponent } from './examen/examen.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { ManejoPlatillosComponent } from './manejo-platillos/manejo-platillos.component';
 import { ManejoOrdenComponent } from './manejo-orden/manejo-orden.component';
+import { AdminPerfilComponent } from './admin-perfil/admin-perfil.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
-    {path:'',component:LoginComponent},
-    {path:'welcome',component:BienvenidaComponent},
-    {path:'inventory',component:ManejoInventarioComponent},
-    {path:'news',component:NewsComponent},
-    {path: 'examen',component:ExamenComponent},
-    {path: 'users',component:ListaUsuariosComponent},
-    {path: 'dish',component:ManejoPlatillosComponent},
-    {path: 'order',component:ManejoOrdenComponent}
+    { path: 'login', component: LoginComponent },
+    { path: 'welcome', component: BienvenidaComponent, canActivate: [AuthGuard] },
+    { path: 'inventory', component: ManejoInventarioComponent, canActivate: [AuthGuard] },
+    { path: 'news', component: NewsComponent, canActivate: [AuthGuard] },
+    { path: 'examen', component: ExamenComponent, canActivate: [AuthGuard] },
+    { path: 'users', component: ListaUsuariosComponent, canActivate: [AuthGuard] },
+    { path: 'dish', component: ManejoPlatillosComponent, canActivate: [AuthGuard] },
+    { path: 'order', component: ManejoOrdenComponent, canActivate: [AuthGuard] },
+    { path: 'miPerfil', component: AdminPerfilComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+    { path: '**', redirectTo: '/welcome' }
 ];

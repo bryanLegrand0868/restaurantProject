@@ -7,19 +7,12 @@ import com.example.project.repository.AdminRepository;
 import com.example.project.table.Admin;
 import com.example.project.table.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdminService {
 
     @Autowired
@@ -50,6 +43,16 @@ public class AdminService {
     @DeleteMapping(path="/eliminar/{idAdministrador}")
     public void eliminar(@PathVariable int idAdministrador) {
         ar.deleteById(idAdministrador);
+    }
+
+    @PutMapping(path="/cambiar-contrasenia/{idAdministrador}")
+    public ResponseEntity<?> cambiarContrasenia(@PathVariable int idAdministrador, @RequestBody String nuevaContrasenia) {
+        Admin administrador = ar.findById(idAdministrador)
+                .orElseThrow(() -> new RuntimeException("Admin no encontrado con el ID: " + idAdministrador));
+
+        administrador.setContrasenia(nuevaContrasenia);
+        ar.save(administrador);
+        return ResponseEntity.ok(administrador);
     }
 
 }
