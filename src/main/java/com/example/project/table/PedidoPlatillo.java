@@ -1,6 +1,6 @@
 package com.example.project.table;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,9 +11,8 @@ public class PedidoPlatillo implements Serializable {
     private static final long serialVersionUID = 6L;
 
     @Id
-    @Column(name="idpedido_platillos")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional=false)
+    @Column(name="idpedido_platillos")
     private Integer idpedidoPlatillo;
 
     @Column(name="cantidad")
@@ -22,11 +21,15 @@ public class PedidoPlatillo implements Serializable {
     @Column(name="Subtotal")
     private Integer subtotal;
 
-    @Column(name="Pedido_idpedido")
-    private Integer pedidoIdpedido;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Pedido_idpedido", referencedColumnName = "idpedido")
+    private Pedido pedido;
 
-    @Column(name="platillo_Idplatillo")
-    private Integer platilloIdplatillo;
+    @Column(name = "Platillo_Idplatillo")
+    private Integer platilloId;
+
+    // Getters y setters
 
     public Integer getIdpedidoPlatillo() {
         return idpedidoPlatillo;
@@ -52,19 +55,20 @@ public class PedidoPlatillo implements Serializable {
         this.subtotal = subtotal;
     }
 
-    public Integer getPedidoIdpedido() {
-        return pedidoIdpedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setPedidoIdpedido(Integer pedidoIdpedido) {
-        this.pedidoIdpedido = pedidoIdpedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public Integer getplatilloIdplatillo() {
-        return platilloIdplatillo;
+    public Integer getPlatilloId() {
+        return platilloId;
     }
 
-    public void setplatilloIdplatillo(Integer platilloIdplatillo) {
-        this.platilloIdplatillo = platilloIdplatillo;
+    public void setPlatilloId(Integer platilloId) {
+        this.platilloId = platilloId;
     }
 }
+

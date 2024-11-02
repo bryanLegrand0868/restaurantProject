@@ -1,9 +1,11 @@
 package com.example.project.table;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +38,10 @@ public class Pedido implements Serializable {
     @Column(name="usuarioIdusuario")
     private Integer usuarioIdusuario;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "pedidoIdpedido")
-    private List<PedidoPlatillo> pedidoPlatilloList;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<PedidoPlatillo> pedidoPlatilloList = new ArrayList<>();
+
 
     public List<PedidoPlatillo> getPedidoPlatilloList() {
         return pedidoPlatilloList;

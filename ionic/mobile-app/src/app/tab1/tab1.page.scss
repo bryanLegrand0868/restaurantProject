@@ -1,0 +1,23 @@
+ion-content {
+    --background: #121212; // Fondo oscuro para el contenido
+  }
+  
+  ion-item {
+    --background: #1e1e1e; // Fondo oscuro para cada elemento
+    color: #fff;
+    border-bottom: 1px solid #333;
+  }
+  
+  ion-label h2,
+  ion-label p {
+    color: #ffffff; // Texto blanco
+  }
+  
+  ion-footer {
+    --background: #121212;
+  }
+  
+  ion-button {
+    color: #ffffff;
+  }
+  

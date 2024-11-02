@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="perfil.nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Apellido</ion-label>
+      <ion-input [(ngModel)]="perfil.apellido"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">NIT</ion-label>
+      <ion-input type="number" [(ngModel)]="perfil.nit"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Correo Electrónico</ion-label>
+      <ion-input [value]="perfil.correoElectronico" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="perfil.contrasenia"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="actualizarPerfil()">Actualizar Perfil</ion-button>
+</ion-content>

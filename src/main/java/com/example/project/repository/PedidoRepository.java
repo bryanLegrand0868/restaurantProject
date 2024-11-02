@@ -13,4 +13,5 @@ import java.util.List;
 public interface PedidoRepository extends JpaRepository<Pedido, Serializable> {
     List<Pedido> findByEstadoPedidoAndFechaHoraPedidoAfter(String estadoPedido, Date fechaHoraActualizada);
     List<Pedido> findByUsuarioIdusuarioAndEstadoPedido(Integer usuarioIdusuario, String estadoPedido);
+    List<Pedido> findByUsuarioIdusuario(Integer usuarioId);
 }

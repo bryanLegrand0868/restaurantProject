@@ -27,10 +27,26 @@ public class PlatilloService {
     @Autowired
     PlatilloRepository platillorepo;
 
-    @GetMapping(path="/buscar")
-    public List<Platillo> buscar(){
-        return platillorepo.findAll();
+    @GetMapping("/buscar")
+    public List<Platillo> buscarPlatillosDisponibles() {
+        List<Platillo> platillos = platillorepo.findAll();
+        List<Platillo> platillosDisponibles = new ArrayList<>();
+
+        for (Platillo platillo : platillos) {
+            boolean disponible = true;
+            for (IngredientesPlatillo ingrediente : platillo.getIngredientesList()) {
+                if (ingrediente.getIngrediente().getStock() < ingrediente.getCantidadIngredientes()) {
+                    disponible = false;
+                    break;
+                }
+            }
+            if (disponible) {
+                platillosDisponibles.add(platillo);
+            }
+        }
+        return platillosDisponibles;
     }
+
 
     @GetMapping(path="/buscar/{idplatillo}")
     public Platillo buscarPorId(@PathVariable int idplatillo) {

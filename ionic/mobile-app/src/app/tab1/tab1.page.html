@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Menú</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let platillo of platillos">
+      <ion-thumbnail slot="start">
+        <img [src]="platillo.foto" alt="Foto del platillo" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ platillo.descripcion }}</h2>
+        <p>Precio: ${{ platillo.precio }}</p>
+        <p *ngIf="!platillo.disponible" color="danger">Stock insuficiente</p>
+      </ion-label>
+      <ion-input
+        *ngIf="platillo.disponible"
+        type="number"
+        placeholder="Cantidad"
+        [(ngModel)]="platillo.cantidad"
+        min="1"
+        value="1"
+        slot="end"
+        style="width: 60px; text-align: center;"
+      ></ion-input>
+      <ion-button fill="clear" slot="end" (click)="agregarAlPedido(platillo, platillo.cantidad || 1)" [disabled]="!platillo.disponible">
+        Añadir
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Total: ${{ precioTotal }}</ion-title>
+    <ion-button expand="full" color="primary" (click)="confirmarPedido()">Confirmar Pedido</ion-button>
+  </ion-toolbar>
+</ion-footer>

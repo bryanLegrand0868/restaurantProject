@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Noticias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let noticia of noticias">
+        <!-- Tarjeta de PrimeNG para cada noticia -->
+        <p-card [header]="noticia.titulo" [style]="{ width: '360px' }">
+          <ng-template pTemplate="header">
+            <!-- Mostrar la imagen en Base64 si existe -->
+            <img *ngIf="noticia.imagen" [src]="'data:image/png;base64,' + noticia.imagen" alt="Imagen de noticia" style="width: 100%; height: auto;" />
+          </ng-template>
+
+          <!-- Subheader con fecha -->
+          <div style="font-weight: bold; color: grey; font-size: small;">
+            {{ noticia.fechaPublicacion | date:'mediumDate' }}
+          </div>
+
+          <!-- Descripción de la noticia -->
+          <p>{{ noticia.descripcion }}</p>
+
+        </p-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

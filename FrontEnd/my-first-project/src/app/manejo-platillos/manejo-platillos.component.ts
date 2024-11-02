@@ -72,33 +72,34 @@ export class ManejoPlatillosComponent {
       }))
     };
   
-    // Verifica si es una creación o una actualización
+    // Verificar el contenido de newPlatillo antes de enviarlo
+    console.log('Platillo a guardar o actualizar:', newPlatillo);
+  
     if (this.nuevoPlatillo.idplatillo) {
-      // Si el platillo tiene un ID, hacemos una actualización
       this.http.put<Platillo>(`http://localhost:8181/platillo/actualizar/${this.nuevoPlatillo.idplatillo}`, newPlatillo).subscribe(
         (response: Platillo) => {
-          console.log('Platillo updated successfully', response);
-          this.getPlatillos();  // Refrescamos la lista de platillos
+          console.log('Platillo actualizado correctamente', response);
+          this.getPlatillos();  
           this.resetForm();
         },
         (error: any) => {
-          console.error('Error updating platillo', error);
+          console.error('Error al actualizar el platillo', error);
         }
       );
     } else {
-      // Si no tiene ID, creamos uno nuevo
       this.http.post<Platillo>('http://localhost:8181/platillo/guardar', newPlatillo).subscribe(
         (response: Platillo) => {
-          console.log('Platillo created successfully', response);
+          console.log('Platillo creado correctamente', response);
           this.getPlatillos();
           this.resetForm();
         },
         (error: any) => {
-          console.error('Error creating platillo', error);
+          console.error('Error al crear el platillo', error);
         }
       );
     }
-  }  
+  }
+  
 
   addIngrediente(ingrediente: Ingrediente | null, cantidad: number) {
     if (ingrediente && !this.nuevoPlatillo.ingredientesList.some(i => i.ingrediente.idIngredientes === ingrediente.idIngredientes)) {

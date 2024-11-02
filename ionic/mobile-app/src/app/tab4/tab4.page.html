@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="pedidos.length > 0; else noPedidos">
+    <ion-item *ngFor="let pedido of pedidos">
+      <ion-label>
+        <h2>Cliente: {{ pedido.cliente }}</h2>
+        <p>Fecha del pedido: {{ pedido.fechaHoraPedido | date: 'short' }}</p>
+        <p>Estado: {{ pedido.estadoPedido }}</p>
+        <p>Total: ${{ pedido.precioTotal }}</p>
+      </ion-label>
+      <ion-button *ngIf="pedido.estadoPedido === 'Pendiente'" (click)="cancelarPedido(pedido.idpedido)">
+        Cancelar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noPedidos>
+    <ion-text color="medium">
+      <p>No tienes pedidos registrados.</p>
+    </ion-text>
+  </ng-template>
+</ion-content>
